@@ -1,27 +1,87 @@
-# AngularGithubActionS3Build
+<img src='https://github.com/byangular/images/raw/master/s3-github-action/architecture.png' border='0' alt='architecture' />
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.1.
+Implementing automatic distribution of [AWS](https://aws.amazon.com/ko/) product [S3](https://aws.amazon.com/ko/s3/) through [GitHub Actions](https://github.com/features/actions) operation.
 
-## Development server
+> Create smart aws diagrams [Cloudcraft](https://cloudcraft.co/)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+<br />
 
-## Code scaffolding
+## What is AWS ?
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Whether you're looking for compute power, database storage, content delivery, or other features with services operated by Amazon, 
 
-## Build
+AWS has services to help you build sophisticated applications with increased flexibility, scalability, and reliability.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## What is S3 ?
 
-## Running unit tests
+Amazon Simple Storage Service (Amazon S3) is an object storage service that offers industry-leading scalability, data availability, security, and performance.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+This means customers of all sizes and industries can use it to store and protect any amount of data for a range of use cases, such as websites, mobile applications, backup and restore, archive, enterprise applications, IoT devices, and big data analytics.
 
-## Running end-to-end tests
+▾ Amazon S3 works
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+<img src='https://github.com/byangular/images/raw/master/s3-github-action/s3-works.png' border='0' alt='s3-works' />
 
-## Further help
+## What is GitHub Actions ?
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+GitHub Actions makes it easy to automate all your software workflows, now with world-class CI/CD. Build, test, and deploy your code right from GitHub. 
+
+Make code reviews, branch management, and issue triaging work the way you want.
+
+## Continuous Deployment with Github Actions
+
+### Add a Workflows File to Your Source Repository
+
+Github Actions to build your workflows yml files.
+
+Add a `*.yml` file to your source code repository to tell Github Actions.
+
+[GitHub Actions](https://github.com/features/actions)
+
+▾ build.yml
+
+```bash
+name: Angular S3 Build
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@master
+
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-build-
+            ${{ runner.OS }}-
+
+      - name: Install
+        run: npm install
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm run test
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          aws s3 cp \
+            --recursive \
+            --region ap-northeast-2 \
+            dist s3://github-action-angular-build-tutorial
+```

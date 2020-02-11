@@ -1,15 +1,23 @@
 {
   "name": "angular-github-action-s3-build",
   "version": "0.0.0",
+  "private": true,
+  "description": "Github Actions + Angular + AWS S3 Build",
+  "author": "AGUMON <ljlm0402@gmail.com>",
+  "license": "ISC",
+  "keywords": [
+    "Github Actions",
+    "Angular",
+    "AWS S3"
+  ],
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "ng test",
+    "test": "ng test --sourceMap=false --browsers=ChromeHeadless --watch=false",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "~9.0.0",
     "@angular/common": "~9.0.0",
