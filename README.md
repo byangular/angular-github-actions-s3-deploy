@@ -2,6 +2,8 @@
 
 Implementing automatic distribution of [AWS](https://aws.amazon.com/ko/) product [S3](https://aws.amazon.com/ko/s3/) through [GitHub Actions](https://github.com/features/actions) operation.
 
+Notifications over [Slack](https://slack.com/intl/en-kr/) using through [GitHub Actions](https://github.com/features/actions)
+
 > Create smart aws diagrams [Cloudcraft](https://cloudcraft.co/)
 
 <br />
@@ -28,7 +30,11 @@ GitHub Actions makes it easy to automate all your software workflows, now with w
 
 Make code reviews, branch management, and issue triaging work the way you want.
 
-## Continuous Deployment with Github Actions
+## What is Slack ?
+
+Slack is a collaboration hub that can replace email to help you and your team work together seamlessly.
+
+It’s designed to support the way people naturally work together, so you can collaborate with people online as efficiently as you do face-to-face.
 
 ### Add a Workflows File to Your Source Repository
 
@@ -83,5 +89,14 @@ jobs:
           aws s3 cp \
             --recursive \
             --region ap-northeast-2 \
-            dist s3://github-action-angular-build-tutorial
+            [dist folder] s3://[s3 bucket name]
+
+      - name: Notification
+        uses: 8398a7/action-slack@v2.6.0
+        with:
+          status: ${{ job.status }}
+          author_name: [slack chatbot name]
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 ```
