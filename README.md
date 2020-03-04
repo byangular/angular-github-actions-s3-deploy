@@ -1,4 +1,4 @@
-<img src='https://github.com/byangular/angular-github-action-s3-build/raw/images/architecture.png' border='0' alt='architecture' />
+<img src='https://github.com/byangular/angular-github-actions-s3-build/raw/images/architecture.png' border='0' alt='architecture' />
 
 Implementing automatic distribution of [AWS](https://aws.amazon.com/ko/) product [S3](https://aws.amazon.com/ko/s3/) through [GitHub Actions](https://github.com/features/actions) operation.
 
@@ -22,7 +22,7 @@ This means customers of all sizes and industries can use it to store and protect
 
 ▾ Amazon S3 works
 
-<img src='https://github.com/byangular/angular-github-action-s3-build/raw/images/s3-works.png' border='0' alt='s3-works' />
+<img src='https://github.com/byangular/angular-github-actions-s3-build/raw/images/s3-works.png' border='0' alt='s3-works' />
 
 ## What is GitHub Actions ?
 
