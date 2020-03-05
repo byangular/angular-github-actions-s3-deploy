@@ -1,4 +1,4 @@
-name: Angular S3 Build
+name: S3 Deploy
 on:
   push:
     branches:

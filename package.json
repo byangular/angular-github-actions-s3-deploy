@@ -1,14 +1,15 @@
 {
-  "name": "angular-github-action-s3-build",
+  "name": "angular-github-action-s3-deploy",
   "version": "0.0.0",
   "private": true,
-  "description": "Github Actions + Angular + AWS S3 Build",
+  "description": "Angular + Github Actions + S3 Deploy",
   "author": "AGUMON <ljlm0402@gmail.com>",
   "license": "ISC",
   "keywords": [
-    "Github Actions",
+    "TypeScript",
     "Angular",
-    "AWS S3"
+    "Github Actions",
+    "S3"
   ],
   "scripts": {
     "ng": "ng",
